@@ -4,7 +4,11 @@ module.exports = {
   theme: {
     extend: {
       backgroundImage: {
-        "custom-img": "url('/images/img6.jpg')",
+        "custom-img": "url('/images/img9.jpg')",
+      },
+      colors: {
+        "custom-color-1": "#0d1b2a",
+        "custom-color-2": "#303942",
       },
     },
   },
