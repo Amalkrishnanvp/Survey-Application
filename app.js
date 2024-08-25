@@ -17,11 +17,13 @@ app.use(express.json());
 
 // Import routes
 const indexRouter = require("./routes/index");
-const dataRouter = require("./routes/data");
+const loginRouter = require("./routes/login");
+const registerRouter = require("./routes/register");
 
 // Use routes
 app.use("/", indexRouter);
-app.use("/data", dataRouter);
+app.use("/login", loginRouter);
+app.use("/register", registerRouter);
 
 // Start server
 app.listen(port, () => {

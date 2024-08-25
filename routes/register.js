@@ -1,9 +1,9 @@
 const express = require("express");
 const router = express.Router();
 
-/* POST data */
+/* GET Registration page */
 router.get("/", (req, res) => {
-  res.send("hello");
+  res.render("register");
 });
 
 module.exports = router;
