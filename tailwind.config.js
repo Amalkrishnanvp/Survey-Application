@@ -18,9 +18,7 @@ module.exports = {
       borderWidth: {
         "custom-thin-1": "1px",
       },
-      plugins: [
-        require("@tailwindcss/forms"),
-      ],
+      plugins: [require("@tailwindcss/forms")],
     },
   },
 };

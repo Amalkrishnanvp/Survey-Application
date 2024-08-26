@@ -7,6 +7,7 @@ const port = 1000;
 // Set view engine: Handlebars
 app.set("view engine", "hbs");
 
+// Register partials
 hbs.registerPartials(__dirname + "/views/partials");
 
 // Server static files from 'public' folder
