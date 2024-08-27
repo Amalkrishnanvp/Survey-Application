@@ -9,6 +9,7 @@ router.get("/", (req, res) => {
 /* POST - Handle login logic */
 router.post("/", (req, res) => {
   res.send("login success");
+  console.log(req.body);
 });
 
 module.exports = router;

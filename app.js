@@ -16,6 +16,9 @@ app.use(express.static("public"));
 // Parse JSON bodies
 app.use(express.json());
 
+// Parse URL-encoded data
+app.use(express.urlencoded({ extended: true }));
+
 // Import routes
 const indexRouter = require("./routes/index");
 const loginRouter = require("./routes/login");
