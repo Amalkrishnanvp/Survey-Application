@@ -12,6 +12,7 @@ router.get("/", (req, res) => {
 router.post("/", (req, res) => {
   res.send("registration success");
   console.log(req.body);
+  const registrationData = req.body;
 
   async function main() {
     const uri = "mongodb://localhost:27017";
@@ -26,7 +27,7 @@ router.post("/", (req, res) => {
       const database = client.db(dbName);
       const collection = database.collection("user");
 
-      const first = await collection.findOne();
+      const first = await collection.insertOne(registrationData);
       console.log(first);
     } catch (error) {
       console.log("Some error occured: ", error);

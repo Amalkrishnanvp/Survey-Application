@@ -13,10 +13,10 @@ hbs.registerPartials(__dirname + "/views/partials");
 // Server static files from 'public' folder
 app.use(express.static("public"));
 
-// Parse JSON bodies
+// Middleware to Parse JSON bodies
 app.use(express.json());
 
-// Parse URL-encoded data
+// Middleware to Parse URL-encoded data
 app.use(express.urlencoded({ extended: true }));
 
 // Import routes
