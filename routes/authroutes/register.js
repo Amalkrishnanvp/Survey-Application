@@ -1,13 +1,13 @@
 const express = require("express");
 const bcrypt = require("bcryptjs");
-const { getDb } = require("../db");
+const { getDb } = require("../../config/db");
 
 const router = express.Router();
 const saltRounds = 10;
 
 /* GET - Render Registration page */
 router.get("/", (req, res) => {
-  res.render("register");
+  res.render("pages/register");
 });
 
 /* POST - Handle Registration logic */

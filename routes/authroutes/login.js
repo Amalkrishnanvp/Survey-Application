@@ -1,12 +1,12 @@
 const express = require("express");
 const bcrypt = require("bcryptjs");
-const { getDb } = require("../db");
+const { getDb } = require("../../config/db");
 
 const router = express.Router();
 
 /* GET - Render Login page */
 router.get("/", (req, res) => {
-  res.render("login");
+  res.render("pages/login");
 });
 
 /* POST - Handle login logic */
@@ -25,7 +25,7 @@ router.post("/", async (req, res) => {
     console.log(user);
 
     if (!user) {
-      return res.status(401).send("Invalid credentials");
+      return res.status(401).send("Invalid username");
     }
 
     // Compare provided password with hashed password
