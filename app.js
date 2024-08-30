@@ -1,5 +1,11 @@
 const express = require("express");
 const hbs = require("hbs");
+const { connectToDb } = require("./db");
+
+// Import routes
+const indexRouter = require("./routes/index");
+const loginRouter = require("./routes/login");
+const registerRouter = require("./routes/register");
 
 const app = express();
 const port = 1000;
@@ -19,10 +25,8 @@ app.use(express.json());
 // Middleware to Parse URL-encoded data
 app.use(express.urlencoded({ extended: true }));
 
-// Import routes
-const indexRouter = require("./routes/index");
-const loginRouter = require("./routes/login");
-const registerRouter = require("./routes/register");
+// Connect to database
+connectToDb();
 
 // Use routes
 app.use("/", indexRouter);

@@ -1,8 +1,9 @@
 const express = require("express");
-const router = express.Router();
+const bcrypt = require("bcryptjs");
+const { getDb } = require("../db");
 
-const { MongoClient } = require("mongodb");
-require("dotenv").config();
+const router = express.Router();
+const saltRounds = 10;
 
 /* GET - Render Registration page */
 router.get("/", (req, res) => {
@@ -10,41 +11,37 @@ router.get("/", (req, res) => {
 });
 
 /* POST - Handle Registration logic */
-router.post("/", (req, res) => {
-  res.send("registration success");
+router.post("/", async (req, res) => {
   console.log(req.body);
 
-  // Registered new user's data
-  const newUserDetails = req.body;
+  // new user's data
+  const { name, email, password } = req.body;
+  const db = getDb();
 
-  async function main() {
-    // Connection string
-    const uri = process.env.MONGO_URI;
-    // Create client object
-    const client = new MongoClient(uri);
+  try {
+    const usersCollection = db.collection("users");
 
-    const dbName = "amal";
+    // Check if the user already exists
+    const userExists = await usersCollection.findOne({ name });
 
-    try {
-      // Connect to database
-      await client.connect();
-      console.log("Connected to MongoDB");
-
-      // Access database and collection
-      const database = client.db(dbName);
-      const collection = database.collection("users");
-
-      // Insert data
-      const first = await collection.insertOne(newUserDetails);
-      console.log(first);
-    } catch (error) {
-      console.log("Some error occured: ", error);
-    } finally {
-      await client.close();
+    if (userExists) {
+      return res.status(400).send("User already exists");
     }
-  }
 
-  main().catch(console.error);
+    // Hash password
+    const hashedPassword = await bcrypt.hash(password, saltRounds);
+
+    // Add new user with hashed password
+    await usersCollection.insertOne({
+      name,
+      email,
+      password: hashedPassword,
+    });
+
+    res.status(201).send("user registered successfully");
+  } catch (error) {
+    res.status(500).send("Error registering user");
+  }
 });
 
 module.exports = router;
