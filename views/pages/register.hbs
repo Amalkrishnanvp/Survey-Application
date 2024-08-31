@@ -48,7 +48,7 @@
             class="block text-sm font-medium leading-6 text-gray-900"
           >Password</label>
         </div>
-        <div class="mt-2">
+        <div class="mt-2 flex relative">
           <input
             id="password"
             name="password"
@@ -57,6 +57,9 @@
             required
             class="p-3 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 sm:text-sm sm:leading-6"
           />
+          <i
+            class="fa-regular fa-eye absolute right-2 top-2.5 cursor-pointer password-eye-icon"
+          ></i>
         </div>
       </div>
 
@@ -67,15 +70,18 @@
             class="block text-sm font-medium leading-6 text-gray-900"
           >Confirm Password</label>
         </div>
-        <div class="mt-2">
+        <div class="mt-2 relative">
           <input
             id="confirmPassword"
             name="confirmPassword"
             type="password"
             autocomplete="confirmPassword"
             required
-            class="p-3 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 sm:text-sm sm:leading-6"
+            class="confirm-password-input p-3 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 sm:text-sm sm:leading-6"
           />
+          <i
+            class="fa-regular fa-eye absolute right-2 top-2.5 cursor-pointer confirm-password-eye-icon"
+          ></i>
         </div>
       </div>
 
