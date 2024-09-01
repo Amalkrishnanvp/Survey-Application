@@ -600,28 +600,20 @@ video {
   left: 0px;
 }
 
-.top-0 {
-  top: 0px;
-}
-
-.right-5 {
-  right: 1.25rem;
-}
-
-.top-2 {
-  top: 0.5rem;
-}
-
-.right-3 {
-  right: 0.75rem;
-}
-
 .right-2 {
   right: 0.5rem;
 }
 
+.top-0 {
+  top: 0px;
+}
+
 .top-2\.5 {
   top: 0.625rem;
+}
+
+.top-5 {
+  top: 1.25rem;
 }
 
 .-z-10 {
@@ -1090,6 +1082,10 @@ video {
 
 * {
   font-family: "Poppins";
+}
+
+.hide {
+  display: none !important;
 }
 
 .placeholder\:text-gray-400::-moz-placeholder {
