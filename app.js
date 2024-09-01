@@ -4,8 +4,8 @@ const { connectToDb } = require("./config/db");
 
 // Import routes
 const indexRouter = require("./routes/index");
-const loginRouter = require("./routes/authroutes/login");
-const registerRouter = require("./routes/authroutes/register");
+const loginRouter = require("./routes/authroutes/loginRouter");
+const registerRouter = require("./routes/authroutes/registerRouter");
 
 const app = express();
 const port = 1000;

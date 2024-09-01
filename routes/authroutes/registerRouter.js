@@ -32,11 +32,15 @@ router.post("/", async (req, res) => {
     const hashedPassword = await bcrypt.hash(password, saltRounds);
 
     // Add new user with hashed password
-    await usersCollection.insertOne({
+    const userData = {
       name,
       email,
       password: hashedPassword,
-    });
+      role: "user",
+    };
+    console.log(userData);
+
+    await usersCollection.insertOne(userData);
 
     res.status(201).send("user registered successfully");
   } catch (error) {
