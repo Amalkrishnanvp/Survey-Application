@@ -34,7 +34,7 @@ router.post("/", async (req, res) => {
     if (user) {
       if (user.role === "admin") {
         if (user.password === password) {
-          res.send("Admin dashboard");
+          res.redirect("/admin/dashboard");
         } else {
           res.send("Incorrect password");
         }
@@ -45,7 +45,7 @@ router.post("/", async (req, res) => {
           return res.status(401).send("Incorrect password");
         }
 
-        res.send("User dashboard");
+        res.redirect("/user/dashboard");
       }
     } else {
       res.send("There is no user with provided username");
