@@ -18,24 +18,31 @@ router.post("/", async (req, res) => {
   console.log(db);
 
   try {
+    const adminCollection = db.collection("admin");
     const usersCollection = db.collection("users");
 
-    // Check if the user exists
-    const user = await usersCollection.findOne({ email });
-    console.log(user);
+    // Check if the login user is admin
+    const user = await adminCollection.findOne({ email });
 
+    // If not admin, check if the user is a regular user
     if (!user) {
-      return res.status(401).send("Invalid username");
+      // Check if the user is a regular user
+      user = await usersCollection.findOne({ email });
     }
 
-    // Compare provided password with hashed password
-    const match = await bcrypt.compare(password, user.password);
+    if (user.role === "admin") {
+      res.send("Admin dashboard");
+    } else if (user.role === "user") {
+      // Compare provided password with hashed password
+      const match = await bcrypt.compare(password, user.password);
+      if (!match) {
+        return res.status(401).send("Password incorrect");
+      }
 
-    if (!match) {
-      return res.status(401).send("Password incorrect");
+      res.send("User dashboard");
+    } else {
+      res.send("Invalid credentials");
     }
-
-    res.send("login successfull");
   } catch (error) {
     return res.status(500).send("Error logging in");
   }
