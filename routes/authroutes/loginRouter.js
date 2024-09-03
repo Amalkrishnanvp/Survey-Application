@@ -22,7 +22,7 @@ router.post("/", async (req, res) => {
     const usersCollection = db.collection("users");
 
     // Check if the login user is admin
-    const user = await adminCollection.findOne({ email });
+    let user = await adminCollection.findOne({ email });
 
     // If not admin, check if the user is a regular user
     if (!user) {
@@ -30,18 +30,25 @@ router.post("/", async (req, res) => {
       user = await usersCollection.findOne({ email });
     }
 
-    if (user.role === "admin") {
-      res.send("Admin dashboard");
-    } else if (user.role === "user") {
-      // Compare provided password with hashed password
-      const match = await bcrypt.compare(password, user.password);
-      if (!match) {
-        return res.status(401).send("Password incorrect");
-      }
+    // If the user is found, compare the provided password with hashed passowrd
+    if (user) {
+      if (user.role === "admin") {
+        if (user.password === password) {
+          res.send("Admin dashboard");
+        } else {
+          res.send("Incorrect password");
+        }
+      } else if (user.role === "user") {
+        const match = await bcrypt.compare(password, user.password);
 
-      res.send("User dashboard");
+        if (!match) {
+          return res.status(401).send("Incorrect password");
+        }
+
+        res.send("User dashboard");
+      }
     } else {
-      res.send("Invalid credentials");
+      res.send("There is no user with provided username");
     }
   } catch (error) {
     return res.status(500).send("Error logging in");
