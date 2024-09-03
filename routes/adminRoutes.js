@@ -3,7 +3,7 @@ const router = express.Router();
 
 // Admin Dashboard
 router.get("/dashboard", (req, res) => {
-  res.send("Welcome to the admin dashboard");
+  res.render("admin/admin-dashboard");
 });
 
 module.exports = router;
