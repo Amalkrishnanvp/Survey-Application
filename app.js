@@ -12,6 +12,11 @@ const userRoutes = require("./routes/userRoutes");
 const app = express();
 const port = 1000;
 
+// Register 'eq' variable for comparing values
+hbs.registerHelper("eq", (a, b) => {
+  return a === b;
+});
+
 // Set view engine: Handlebars
 app.set("view engine", "hbs");
 

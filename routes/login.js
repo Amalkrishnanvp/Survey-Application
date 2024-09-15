@@ -1,13 +1,9 @@
 const express = require("express");
 const router = express.Router();
 
-/* GET Home page */
+/* GET Login page */
 router.get("/", (req, res) => {
-  res.render("index", {
-    title: "Survey Application",
-    message: "Success",
-    role: "none",
-  });
+  res.render("login");
 });
 
 module.exports = router;
