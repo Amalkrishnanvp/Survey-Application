@@ -3,9 +3,7 @@ const hbs = require("hbs");
 const { connectToDb } = require("./config/db");
 
 // Import routes
-const indexRouter = require("./routes/index");
-const loginRouter = require("./routes/authroutes/loginRouter");
-const registerRouter = require("./routes/authroutes/registerRouter");
+const authRouter = require("./routes/authRoutes");
 const adminRoutes = require("./routes/adminRoutes");
 const userRoutes = require("./routes/userRoutes");
 
@@ -36,9 +34,7 @@ app.use(express.urlencoded({ extended: true }));
 connectToDb();
 
 // Use routes
-app.use("/", indexRouter);
-app.use("/login", loginRouter);
-app.use("/register", registerRouter);
+app.use("/", authRouter);
 app.use("/admin", adminRoutes);
 app.use("/user", userRoutes);
 
